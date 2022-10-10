@@ -470,7 +470,7 @@ def train_dino(args):
             with (Path(args.output_dir) / "log.txt").open("a") as f:
                 f.write(json.dumps(log_stats) + "\n")
                 for k, v in train_stats.items():
-                    writer.add_scalar(k, v, epoch)
+                    writer.add_scalar(f"train_{k}", v, epoch)
     total_time = time.time() - start_time
     total_time_str = str(datetime.timedelta(seconds=int(total_time)))
     print("Training time {}".format(total_time_str))
@@ -694,7 +694,7 @@ if __name__ == "__main__":
     # install timm
     parser = argparse.ArgumentParser("DINO", parents=[get_args_parser()])
     args = parser.parse_args()
-    args.data_path = "/data/datasets/PANCAN/pathology_tiles/parafine/COAD/HIPT/patch_256_pretraining/"
+    args.data_path = "/data/datasets/PANCAN/pathology_tiles/parafine/COAD/HIPT/patch_224_pretraining/"
     args.output_dir = (
         "/data/datasets/PANCAN/pathology_tiles/parafine/COAD/HIPT/dino_16/"
     )
